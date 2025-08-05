@@ -23,7 +23,3 @@ echo constant( "wife" );
 echo "\n I love {$constant( "wife" )} \n";
 
 $friends = [];
-
-var_dump( $name );
-var_dump( $age );
-var_dump( $friends );
