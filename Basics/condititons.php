@@ -122,3 +122,23 @@ $n = 13;
 echo PHP_EOL;
 $result = $n % 2 == 0 ? "A" : ( ( $n == 11 ) ? "B" : "C" );
 echo $result;
+
+$default_lat = 23.9;
+$default_lon = 90.8;
+$user_lat    = 12.3;
+
+echo $lat;
+
+// if else
+if ( isset( $user_lat ) ) {
+    $lat = $user_lat;
+} else {
+    $lat = $default_lat;
+}
+
+//  ternary operator
+$lat = isset( $user_lat ) ? $user_lat : $default_lat;
+
+// null coalesce operator
+
+$lat = $user_lat ?? $default_lat;
