@@ -16,7 +16,7 @@
 
 <div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg
 shadow-sm hover:bg-gray-100 ">
-<p class="font-normal text-gray-700">
+<p class="text-4xl font-bold text-gray-700">
 <?php if (
         ( isset( $_POST['name'] ) && ( ! empty( $_POST['name'] ) ) )
     ) {
@@ -26,19 +26,30 @@ shadow-sm hover:bg-gray-100 ">
 
 
 </p>
-<p class="font-normal text-gray-700">
+<p class="text-2xl font-bold text-gray-700">
 
 
 <?php
 
     if ( ( isset( $_POST["email"] ) ) && ( ! empty( $_POST["email"] ) ) ) {
-        echo $_POST["email4r5t"];
+        echo $_POST["email"];
 
     }
 
 ?>
 
 </p>
+
+<p class="text-lg  text-gray-700">
+
+<?php if (
+        ( isset( $_POST["message"] ) ) && ( ! empty( $_POST["message"] ) )
+    ) {
+        echo $_POST["message"];
+    }
+?>
+</p>
+
 </div>
     </div>
 
