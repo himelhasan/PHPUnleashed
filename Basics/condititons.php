@@ -24,9 +24,8 @@ if ( $atika > $tasbir ) {
 $age = 19;
 
 // Multiple conditions using logical AND (&&)
-if ( $age >= 13 && $age <= 18 ) {
-    echo "Teenager";
-} elseif ( $age <= 12 && $age >= 5 ) {
+if ( $age >= 13 && $age <= 18 ) {echo "Teenager";} elseif
+( $age <= 12 && $age >= 5 ) {
     echo "child";
 } else {
     echo "Hoy gura naile bura \n";

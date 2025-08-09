@@ -1,91 +1,140 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  </head>
-  <body>
-
-<section class="text-gray-600 body-font relative ">
-  <div class="container px-5 py-24 mx-auto">
-    <div class="flex flex-col text-center w-full mb-12">
-      <h1 class="sm:text-3xl text-2xl font-medium
-      title-font mb-4 text-gray-900">Contact Us</h1>
-
-
-<div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg
-shadow-sm hover:bg-gray-100 ">
-<p class="text-4xl font-bold text-gray-700">
-<?php if (
-        ( isset( $_POST['name'] ) && ( ! empty( $_POST['name'] ) ) )
-    ) {
-        echo $_POST['name'];
-
-}?>
-
-
-</p>
-<p class="text-2xl font-bold text-gray-700">
-
-
 <?php
-
-    if ( ( isset( $_POST["email"] ) ) && ( ! empty( $_POST["email"] ) ) ) {
-        echo $_POST["email"];
-
-    }
-
+    include_once __DIR__ . '/../functions/InputFunc.php';
 ?>
 
-</p>
 
-<p class="text-lg  text-gray-700">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="max-w-2xl mx-auto py-16 px-4">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-semibold text-gray-900 mb-4">Contact Us</h1>
 
-<?php if (
-        ( isset( $_POST["message"] ) ) && ( ! empty( $_POST["message"] ) )
-    ) {
-        echo $_POST["message"];
-    }
-?>
-</p>
+            <!-- Display submitted data -->
+            <div class="bg-white p-6 rounded-lg border mb-8 text-left">
+                <p class="text-2xl font-bold text-gray-700 mb-2">
+                    <?php
+                        if ( isset( $_POST['name'] ) && ! empty( $_POST['name'] ) ) {
+                            echo htmlspecialchars( $_POST['name'] );
+                        }
+                    ?>
+                </p>
+                <p class="text-lg text-gray-600 mb-2">
+                    <?php
+                        if ( isset( $_POST["email"] ) && ! empty( $_POST["email"] ) ) {
+                            echo filter_input( INPUT_POST, "email", FILTER_SANITIZE_SPECIAL_CHARS );
+                        }
+                    ?>
+                </p>
+                <p class="text-gray-700">
+                    <?php
+                        // if ( isset( $_POST["message"] ) && ! empty( $_POST["message"] ) ) {
+                        //     echo htmlspecialchars( $_POST["message"] );
+                        // }
+                        echo inputFunc( INPUT_POST, "message", FILTER_SANITIZE_SPECIAL_CHARS );
+                    ?>
+                </p>
+            </div>
+        </div>
 
-</div>
+        <form action="" method="POST" class="bg-white p-8 rounded-lg border">
+            <!-- Name and Email -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                    <input type="text" id="name" name="name"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input type="email" id="email" name="email"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+            </div>
+
+            <!-- Message -->
+            <div class="mb-6">
+                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                <textarea id="message" name="message" rows="4"
+                          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+            </div>
+
+            <!-- Country Selection -->
+            <div class="mb-6">
+                <fieldset>
+                    <legend class="text-sm font-medium text-gray-700 mb-3">Country</legend>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="countries" value="USA" class="mr-2" checked>
+                            <span class="text-sm text-gray-700">United States</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="countries" value="Germany" class="mr-2">
+                            <span class="text-sm text-gray-700">Germany</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="countries" value="Spain" class="mr-2">
+                            <span class="text-sm text-gray-700">Spain</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="countries" value="United Kingdom" class="mr-2">
+                            <span class="text-sm text-gray-700">United Kingdom</span>
+                        </label>
+                    </div>
+                </fieldset>
+            </div>
+
+            <!-- File Upload -->
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Upload File</label>
+                <input type="file" class="w-full px-3 py-2 border border-gray-300 rounded-md file:mr-4 file:py-1 file:px-3 file:border-0 file:bg-gray-100 file:text-gray-700 file:rounded">
+            </div>
+
+            <!-- Checkboxes -->
+            <div class="mb-6">
+                <fieldset>
+                    <legend class="text-sm font-medium text-gray-700 mb-3">Options</legend>
+                    <div class="space-y-3">
+                        <label class="flex items-start">
+                            <input type="checkbox" class="mr-2 mt-0.5" checked>
+                            <span class="text-sm text-gray-700">I agree to the <a href="#" class="text-blue-600 hover:underline">terms and conditions</a></span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-2">
+                            <span class="text-sm text-gray-700">I want to get promotional offers</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-2">
+                            <span class="text-sm text-gray-700">I am 18 years or older</span>
+                        </label>
+                        <label class="flex items-start">
+                            <input type="checkbox" class="mr-2 mt-0.5">
+                            <div>
+                                <span class="text-sm font-medium text-gray-700">Free shipping via Flowbite</span>
+                                <p class="text-xs text-gray-500">For orders shipped from $25 in books or $29 in other categories</p>
+                            </div>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-2" disabled>
+                            <span class="text-sm text-gray-400">Eligible for international shipping (disabled)</span>
+                        </label>
+                    </div>
+                </fieldset>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit" class="bg-blue-600 text-white px-8 py-2 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                    Submit
+                </button>
+            </div>
+        </form>
     </div>
-
-    <form action="" method="POST">
-<div class="lg:w-1/2 md:w-2/3 mx-auto">
-      <div class="flex flex-wrap -m-2">
-        <div class="p-2 w-1/2">
-          <div class="relative">
-            <label for="name" class="leading-7 text-sm text-gray-600">Name</label>
-            <input type="text" id="name" name="name" class="w-full
-            bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-          </div>
-        </div>
-        <div class="p-2 w-1/2">
-          <div class="relative">
-            <label for="email" class="leading-7 text-sm text-gray-600">Email</label>
-            <input type="email" id="email" name="email" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-          </div>
-        </div>
-        <div class="p-2 w-full">
-          <div class="relative">
-            <label for="message" class="leading-7 text-sm text-gray-600">Message</label>
-            <textarea id="message" name="message" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
-          </div>
-        </div>
-        <div class="p-2 w-full">
-          <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">SUBMIT</button>
-        </div>
-
-      </div>
-    </div>
-
-
-    </form>
-  </div>
-</section>
-
-  </body>
+</body>
 </html>

@@ -11,8 +11,7 @@ echo $sum;
 echo "\n";
 
 /*
-array_reduce works: It takes three parameters:
-array — the input array to process 
+array_reduce works: It takes three parameters: array — the input array to process  
 callback — a function that takes two arguments:
 the accumulator (carry) value the current array item
 initial (optional) — the initial value for the accumulator (carry)
